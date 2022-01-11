@@ -2,16 +2,28 @@ import random
 
 choice=0
 
-def Play():
+gameLogic = {'r':'p','p':'s','s':'r'}
+gameDifficulty = 1
+gameDifficultyWords = {1:'Easy',2:'Difficult',3:'Impossible'}
+def Play(n):
   maxVal=int(input("\nMaximum possible score: "))
   runCount = 0
   compCount = 0
   userCount = 0
   choicesPlay = ['r','p','s']
   while compCount!=maxVal and userCount!=maxVal:
+    choicesPlay = ['r','p','s']
+    print(type(choicesPlay))
     runCount += 1
     print("\n––––––––––––– Run",runCount,"–––––––––––––")
     userChoice = input("Rock Paper Scissors: ")
+    if n==1:
+      choicesPlay = ['r','p','s']
+    elif n==2:
+      choicesPlay = choicesPlay+list(gameLogic[userChoice])
+    elif n==3:
+      choicesPlay = choicesPlay+list(gameLogic[userChoice])+list(gameLogic[userChoice])+list(gameLogic[userChoice])
+
     compChoice = random.choice(choicesPlay)
     if userChoice == compChoice:
       print(userChoice,"vs",compChoice)
@@ -63,7 +75,7 @@ def Play():
 
     else:
       print("ERROR! u:",userChoice,"c:",compChoice)
-    print("––––––––––––––––––––––––––")
+    print("––––––––––––––––––––––––––––––––––")
 
   if userCount>compCount:
     print("\nYAYY!!! You Won")
@@ -77,18 +89,33 @@ def Play():
     print("\n")
 
 
+def Rules():
+  print("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––")
+  print("Welcome to Rock Paper Scissors.")
+  print("Rock == r \nPaper == p \nScissors == s")
+  print("Puter will ask you Maximum Number of Score to win the Game.")
+  print("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––")
 
 
-while choice != 4:
-  print("Select an option: \n1.)Play\n2.)Highscores\n3.)Rules of Play\n4.)Exit")
+while choice != 5:
+  gameMode=1
+  print("Select an option: \n1.)Play\n2.)Highscores\n3.)Game Difficulty\n4.)Rules of Play\n5.)Exit")
   choice=input("Enter Your Choice: ")
   choice=int(choice)
   if choice==1:
-    Play()
+
+    Play(gameDifficulty)
   elif choice==2:
     print("Working on that")
   elif choice==3:
-    print("Working on that")
+    print("\n––––––––––––––––––––––––––––––––––––––––––")
+    print("Game Difficulty:\n1.)Easy\n2.)Difficult\n3.)Impossible")
+    gameDifficulty=int(input("Enter Game Difficulty: "))
+    print("Game Difficulty set to",str(gameDifficultyWords[gameDifficulty]))
+    print("––––––––––––––––––––––––––––––––––––––––––\n")
+
+  elif choice==4:
+    Rules()
   else:
     print("Bye..")
     exit()
