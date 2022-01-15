@@ -13,7 +13,6 @@ def Play(n):
   choicesPlay = ['r','p','s']
   while compCount!=maxVal and userCount!=maxVal:
     choicesPlay = ['r','p','s']
-    print(type(choicesPlay))
     runCount += 1
     print("\n––––––––––––– Run",runCount,"–––––––––––––")
     userChoice = input("Rock Paper Scissors: ")
